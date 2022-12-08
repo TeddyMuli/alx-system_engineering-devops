@@ -1,3 +1,2 @@
 #!/bin/bash
 TRUEKNOWLEDGE=1209
-result=`expr $128 + $TRUEKNOWLEDGE`
