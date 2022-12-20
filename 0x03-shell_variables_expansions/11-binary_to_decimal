@@ -1,2 +1,2 @@
 #!/bin/bash
-binary=1000100
+echo $((2#$BINARY))

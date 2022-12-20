@@ -1,2 +1,2 @@
 #!/bin/bash
-NUM=98.0
+printf '%.2f\n' $NUM

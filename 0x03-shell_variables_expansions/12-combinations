@@ -1,2 +1,2 @@
 #!/bin/bash
-letters
+print "%s\n" {a..z}{a..z} | grep -v "oo"
