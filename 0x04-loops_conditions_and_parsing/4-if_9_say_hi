@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# if statement
 
 i=1
 while [ $i -le 10 ]
