@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 # Get the list of all running processes and store it in a variable
-processes=$(ps aux)
-
 # Print the list of processes
-echo "$processes"
+ps -auxf
