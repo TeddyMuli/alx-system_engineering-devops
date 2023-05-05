@@ -9,3 +9,6 @@ if [ "$#" -eq 0 ]; then
 else
 	ping -c 5 "$1"
 fi
+=======
+#!/usr/bin/env bash
+#q5
