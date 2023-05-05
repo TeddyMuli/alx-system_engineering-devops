@@ -10,5 +10,3 @@ else
 	ping -c 5 "$1"
 fi
 =======
-#!/usr/bin/env bash
-#q5
