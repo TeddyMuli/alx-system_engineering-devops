@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+ips = $(ifconfig | grep 'inet' | awk '{print $2}')
+
+for ip in $ips
+do
+    if [[ $ip == *"127.0.0.1"* || $ip*":"* ]]; then
+        continue
+    else
+        echo "$ip"
+    fi
+done
