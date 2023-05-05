@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-#q4
-ping 8.8.8.8
+# a Bash script that displays listening ports:
+
+sudo netstat -lp
