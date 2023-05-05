@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#it shows all ip addresses
 
 ips = $(ifconfig | grep 'inet' | awk '{print $2}')
 
