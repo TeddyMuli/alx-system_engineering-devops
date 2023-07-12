@@ -1,9 +1,9 @@
 # configure the server
 
-file { '/home/ubuntu/.ssh/config':
+file { '/etc/ssh/ssh_config':
   ensure => 'file',
   owner  => 'ubuntu',
   group  => 'ubuntu',
-  mode   => '0600',
-  content => "Host ubuntu\n\tIdentityFile ~/.ssh/school\n\tPasswordAuthentication no\n",
+  mode   => '0644',
+  content => "PasswordAuthentication no\n",
 }
