@@ -1,1 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# 0x0F-load_balancer
+
+sudo apt update -y
+sudo apt update -y
+sudo apt install nginx -y
+sed -i '/listen 80 default_server/i add_header X-Served-By $HOSTNAME;' /etc/nginx/sites-available/default
+sudo service nginx restart
