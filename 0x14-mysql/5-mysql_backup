@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 # backup and compress my databases
-mysqldump --all-databases -u root --password="$1" > backup.sql
-day=$(date +"%d")
-month=$(date +"%m")
-year=$(date +"%Y")
-file_name="$day-$month-$year.tar.gz"
-tar -czvf "$file_name" backup.sql
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <mysql_password>"
+  exit 1
+fi
+
+DATE=$(date +'%d-%m-%Y')
+MYSQL_DUMP_FILENAME="backup.sql"
+ARCHIVE_NAME="${DATE}.tar.gz"
+MYSQL_USER="root"
+MYSQL_PASSWORD="$1"
+BACKUP_DIR="/path/to/backup/directory"
+
+mkdir -p "$BACKUP_DIR"
+mysqldump -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" --all-databases > "$BACKUP_DIR/$MYSQL_DUMP_FILENAME"
+tar -czf "$BACKUP_DIR/$ARCHIVE_NAME" -C "$BACKUP_DIR" "$MYSQL_DUMP_FILENAME"
+rm "$BACKUP_DIR/$MYSQL_DUMP_FILENAME"
+echo "Backup completed successfully. Archive: $BACKUP_DIR/$ARCHIVE_NAME"
