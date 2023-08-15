@@ -1,36 +1,30 @@
 #!/usr/bin/python3
-"""
-Check student .CSV output of user information
-"""
+'''A script that gathers employee name completed
+tasks and total number of tasks from an API
+'''
 
-import csv
+import re
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users?id="
-todos_url = "https://jsonplaceholder.typicode.com/todos"
+REST_API = "https://jsonplaceholder.typicode.com"
 
-
-def user_info(id):
-    """ Check user information """
-
-    total_tasks = 0
-    response = requests.get(todos_url).json()
-    for i in response:
-        if i['userId'] == id:
-            total_tasks += 1
-
-    num_lines = 0
-    with open(str(id) + ".csv", 'r') as f:
-        for line in f:
-            if not line == '\n':
-                num_lines += 1
-
-    if total_tasks == num_lines:
-        print("Number of tasks in CSV: OK")
-    else:
-        print("Number of tasks in CSV: Incorrect")
-
-
-if __name__ == "__main__":
-    user_info(int(sys.argv[1]))
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        if re.fullmatch(r'\d+', sys.argv[1]):
+            id = int(sys.argv[1])
+            emp_req = requests.get('{}/users/{}'.format(REST_API, id)).json()
+            task_req = requests.get('{}/todos'.format(REST_API)).json()
+            emp_name = emp_req.get('name')
+            tasks = list(filter(lambda x: x.get('userId') == id, task_req))
+            completed_tasks = list(filter(lambda x: x.get('completed'), tasks))
+            print(
+                'Employee {} is done with tasks({}/{}):'.format(
+                    emp_name,
+                    len(completed_tasks),
+                    len(tasks)
+                )
+            )
+            if len(completed_tasks) > 0:
+                for task in completed_tasks:
+                    print('\t {}'.format(task.get('title')))
