@@ -1,15 +1,36 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
+"""
+Check student .CSV output of user information
+"""
+
+import csv
 import requests
 import sys
 
-if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+users_url = "https://jsonplaceholder.typicode.com/users?id="
+todos_url = "https://jsonplaceholder.typicode.com/todos"
 
-    completed = [t.get("title") for t in todos if t.get("completed") is True]
-    print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(completed), len(todos)))
-    [print("\t {}".format(c)) for c in completed]
-    
+
+def user_info(id):
+    """ Check user information """
+
+    total_tasks = 0
+    response = requests.get(todos_url).json()
+    for i in response:
+        if i['userId'] == id:
+            total_tasks += 1
+
+    num_lines = 0
+    with open(str(id) + ".csv", 'r') as f:
+        for line in f:
+            if not line == '\n':
+                num_lines += 1
+
+    if total_tasks == num_lines:
+        print("Number of tasks in CSV: OK")
+    else:
+        print("Number of tasks in CSV: Incorrect")
+
+
+if __name__ == "__main__":
+    user_info(int(sys.argv[1]))
