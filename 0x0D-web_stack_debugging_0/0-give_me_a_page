@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# Fixes an apche server in a container
-
-service apache2 start
