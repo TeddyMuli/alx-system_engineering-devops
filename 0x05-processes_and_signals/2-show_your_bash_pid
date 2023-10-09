@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# Get the list of all running processes and filter it to show only those containing "bash"
-processes=$(ps aux | grep bash)
-
-# Print the list of filtered processes
-echo "$processes"

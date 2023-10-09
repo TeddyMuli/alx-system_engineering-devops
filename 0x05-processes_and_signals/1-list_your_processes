@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# Get the list of all running processes and store it in a variable
-# Print the list of processes
-ps -auxf
