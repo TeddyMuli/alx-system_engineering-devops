@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#This shows the pid of the bash
 
 for pid_dir in /proc/*/; do
     pid=$(basename "$pid_dir")
