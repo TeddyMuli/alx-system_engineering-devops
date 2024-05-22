@@ -1,20 +1,4 @@
 #!/usr/bin/env bash
-#This shows the pid of the bash
+# This shows the pid of the bash
 
-for pid_dir in /proc/*/; do
-    pid=$(basename "$pid_dir")
-
-    # Check if the directory name is a number (indicating a process)
-    if [[ $pid =~ ^[0-9]+$ ]]; then
-        # Get the command line arguments from cmdline file
-        cmdline=$(tr -d '\0' < "$pid_dir/cmdline")
-
-        # Extract the process name from command line
-        process_name=$(echo "$cmdline" | awk '{print $1}')
-
-        # Check if the process name contains "bash"
-        if [[ $process_name == *"bash"* ]]; then
-            echo "$pid $process_name"
-        fi
-    fi
-done
+pgrep -l bash
