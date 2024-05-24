@@ -1,9 +1,6 @@
-# increases the upper limit and restart nginx
-exec { 'increase upper limit':
-  provider => shell,
-  command  => 'sed -i s/15/1000000/ /etc/default/nginx'
-}
-exec { 'restart nginx server':
-  provider => shell,
-  command  => 'service nginx restart'
+# Fixes an nginx site that can't handle multiple concurrent requests
+exec { 'fix--for-nginx':
+  command => "bash -c \"sed -iE 's/^ULIMIT=.*/ULIMIT=\\\"-n 8192\\\"/' \
+/etc/default/nginx; service nginx restart\"",
+  path    => '/usr/bin:/usr/sbin:/bin'
 }
