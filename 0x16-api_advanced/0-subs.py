@@ -11,7 +11,7 @@ def number_of_subscribers(subreddit):
     }
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code != 200:
-        print(f"Error: Received status code {response.status_code}")
+        print("Error: Received status code {}".format(response.status_code))
         return 0
     
     try:
@@ -20,5 +20,5 @@ def number_of_subscribers(subreddit):
         return results.get("subscribers", 0)
     except ValueError:
         # If parsing fails, print the response text for debugging
-        print(f"Error: Unable to parse JSON. Response text: {response.text}")
+        print("Error: Unable to parse JSON. Response text: {}".format(response.text))
         return 0
